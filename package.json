@@ -1,6 +1,6 @@
 {
   "name": "test-jli-datepicker",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "license": "MIT",
   "readme": "https://github.com/jeromel/jli-datepicker/blob/develop/README.md",
   "scripts": {
@@ -31,6 +31,7 @@
     "@angular/router": "~7.1.0",
     "@ng-bootstrap/ng-bootstrap": "^4.0.1",
     "core-js": "^2.5.4",
+    "jli-datepicker": "file:dist/jli-datepicker/jli-datepicker-0.0.1.tgz",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"
