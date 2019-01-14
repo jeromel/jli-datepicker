@@ -1,7 +1,8 @@
-import {Component, OnInit, ViewChild, ElementRef, Renderer2} from '@angular/core';
+import {Component, OnInit, ViewChild, ElementRef, Renderer2, Output, Input, EventEmitter} from '@angular/core';
 import { NgbDateStruct, NgbInputDatepicker, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { NgModel } from '@angular/forms';
+import { toDate } from '@angular/common/src/i18n/format_date';
 
 const now = new Date();
 const equals = (one: NgbDateStruct, two: NgbDateStruct) =>
@@ -43,8 +44,11 @@ export class JliDatepickerComponent implements OnInit{
     maxDate: NgbDateStruct;
     minDate: NgbDateStruct;
     hoveredDate: NgbDateStruct;
-    fromDate: any;
-    toDate: any;
+    fromDate: NgbDateStruct;
+    toDate: NgbDateStruct;
+
+    @Output() change: EventEmitter<Array<NgbDateStruct>> = new EventEmitter<Array<NgbDateStruct>>();
+
     model: any;
     private _subscription: Subscription;
     private _selectSubscription: Subscription;
@@ -72,6 +76,12 @@ export class JliDatepickerComponent implements OnInit{
             this.fromDate = date;
         } else if (this.fromDate && !this.toDate && after(date, this.fromDate)) {
             this.toDate = date;
+
+            let range: Array<NgbDateStruct> = [];
+            range.push(this.fromDate);
+            range.push(this.toDate);
+
+            this.change.emit(range);
             
             this.input.close();
         } else {

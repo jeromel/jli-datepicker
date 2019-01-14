@@ -21,4 +21,9 @@
 <router-outlet></router-outlet>
 
 
-<lib-jli-datepicker></lib-jli-datepicker>
+<lib-jli-datepicker (change)="OnDateChange($event)"></lib-jli-datepicker>
+
+
+<hr/>
+<pre>From: {{ fromDate | json }}</pre>
+<pre>To: {{ toDate | json }}</pre>
