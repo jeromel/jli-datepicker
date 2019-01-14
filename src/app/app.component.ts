@@ -13,8 +13,8 @@ export class AppComponent {
   toDate: NgbDateStruct;
 
   public OnDateChange(event): void {
-    console.debug(event[0]);
-    console.debug(event[1]);
+    this.fromDate = event[0]
+    this.toDate = event[1];
 
     console.debug(this.fromDate);
     console.debug(this.toDate);
