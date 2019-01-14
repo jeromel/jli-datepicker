@@ -15,10 +15,6 @@ import {
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { NgbUTCStringAdapter } from './adapters/ngb-UTC-string-adapter';
-import { NgbDateFRParserFormatter } from './adapters/ngb-date-fr-parser-formatter';
-
-
 @NgModule({
   declarations: [JliDatepickerComponent],
   imports: [
@@ -26,15 +22,6 @@ import { NgbDateFRParserFormatter } from './adapters/ngb-date-fr-parser-formatte
     NgbModule.forRoot()
   ],
   exports: [JliDatepickerComponent],
-  providers: [
-    {
-      provide: NgbDateParserFormatter,
-      useClass: NgbDateFRParserFormatter
-    },
-    {
-        provide: NgbDateAdapter,
-        useClass: NgbUTCStringAdapter
-    },
-  ]
+  providers: []
 })
 export class JliDatepickerModule { }
