@@ -1,8 +1,7 @@
-import {Component, OnInit, ViewChild, ElementRef, Renderer2, Output, Input, EventEmitter} from '@angular/core';
+import {Component, OnInit, ViewChild, ElementRef, Renderer2, Output, EventEmitter} from '@angular/core';
 import { NgbDateStruct, NgbInputDatepicker, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { NgModel } from '@angular/forms';
-import { toDate } from '@angular/common/src/i18n/format_date';
 
 const now = new Date();
 const equals = (one: NgbDateStruct, two: NgbDateStruct) =>
@@ -19,25 +18,7 @@ const after = (one: NgbDateStruct, two: NgbDateStruct) =>
 @Component({
   selector: 'lib-jli-datepicker',
   templateUrl: './jli-datepicker.component.html',
-  styles: [`
-    .custom-day {
-      text-align: center;
-      padding: 0.185rem 0.25rem;
-      display: inline-block;
-      height: 2rem;
-      width: 2rem;
-    }
-    .custom-day.focused {
-      background-color: #e6e6e6;
-    }
-    .custom-day.range, .custom-day:hover {
-      background-color: rgb(2, 117, 216);
-      color: white;
-    }
-    .custom-day.faded {
-      background-color: rgba(2, 117, 216, 0.5);
-    }
-  `]
+  styleUrls: [ './jli-datepicker.component.scss']
 })
 export class JliDatepickerComponent implements OnInit{
   startDate: NgbDateStruct;
@@ -49,9 +30,6 @@ export class JliDatepickerComponent implements OnInit{
 
     @Output() change: EventEmitter<Array<NgbDateStruct>> = new EventEmitter<Array<NgbDateStruct>>();
 
-    model: any;
-    private _subscription: Subscription;
-    private _selectSubscription: Subscription;
     @ViewChild("d") input: NgbInputDatepicker;
     @ViewChild(NgModel) datePick: NgModel;
     @ViewChild('myRangeInput') myRangeInput: ElementRef;
@@ -61,7 +39,7 @@ export class JliDatepickerComponent implements OnInit{
     isInside = date => after(date, this.fromDate) && before(date, this.toDate);
     isFrom = date => equals(date, this.fromDate);
     isTo = date => equals(date, this.toDate);
-    constructor(element: ElementRef, private renderer: Renderer2, private _parserFormatter: NgbDateParserFormatter) {
+    constructor(private renderer: Renderer2, private _parserFormatter: NgbDateParserFormatter) {
         
     }
     ngOnInit() {
