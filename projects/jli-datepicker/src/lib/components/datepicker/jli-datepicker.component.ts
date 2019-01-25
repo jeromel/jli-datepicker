@@ -1,6 +1,5 @@
 import {Component, OnInit, ViewChild, ElementRef, Renderer2, Output, EventEmitter} from '@angular/core';
 import { NgbDateStruct, NgbInputDatepicker, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
-import { Subscription } from 'rxjs';
 import { NgModel } from '@angular/forms';
 
 const now = new Date();
@@ -43,9 +42,17 @@ export class JliDatepickerComponent implements OnInit{
         
     }
     ngOnInit() {
-        this.startDate = {year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate()};
+        let startYear: number = now.getFullYear();
+        let startMonth: number = now.getMonth();
+
+        if (0 == startMonth) {
+          --startYear;
+          startMonth = 12;
+        }
+
+        this.startDate = {year: startYear, month: startMonth, day: null};
         this.maxDate = { year: now.getFullYear() + 1, month: now.getMonth() + 1, day: now.getDate()};
-        this.minDate = {year: now.getFullYear() - 1, month: now.getMonth() + 1, day: now.getDate()};
+        this.minDate = {year: now.getFullYear() - 1, month: now.getMonth() +1, day: now.getDate()};
     }
 
     onDateSelection(date: NgbDateStruct) {
