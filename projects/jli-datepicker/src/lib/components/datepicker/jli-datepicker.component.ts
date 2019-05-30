@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, ElementRef, Renderer2, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, ViewChild, ElementRef, Renderer2, Output, EventEmitter, Input, OnChanges} from '@angular/core';
 import { NgbDateStruct, NgbInputDatepicker, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { NgModel } from '@angular/forms';
 
@@ -19,14 +19,15 @@ const after = (one: NgbDateStruct, two: NgbDateStruct) =>
   templateUrl: './jli-datepicker.component.html',
   styleUrls: [ './jli-datepicker.component.scss']
 })
-export class JliDatepickerComponent implements OnInit{
+export class JliDatepickerComponent implements OnInit, OnChanges {
   startDate: NgbDateStruct;
     maxDate: NgbDateStruct;
     minDate: NgbDateStruct;
     hoveredDate: NgbDateStruct;
+    @Input()
     fromDate: NgbDateStruct;
+    @Input()
     toDate: NgbDateStruct;
-
     @Output() change: EventEmitter<Array<NgbDateStruct>> = new EventEmitter<Array<NgbDateStruct>>();
 
     @ViewChild("d") input: NgbInputDatepicker;
@@ -41,7 +42,9 @@ export class JliDatepickerComponent implements OnInit{
     constructor(private renderer: Renderer2, private _parserFormatter: NgbDateParserFormatter) {
         
     }
+
     ngOnInit() {
+        this.datePopinOpened = false;
         let startYear: number = now.getFullYear();
         let startMonth: number = now.getMonth();
 
@@ -81,5 +84,40 @@ export class JliDatepickerComponent implements OnInit{
         }
        
         this.renderer.setProperty(this.myRangeInput.nativeElement, 'value', parsed);
+    }
+
+    ngOnChanges(changes: import("@angular/core").SimpleChanges): void {
+      let parsed = '';
+      
+      let fDate: NgbDateStruct = changes.fromDate.currentValue;
+      let tDate: NgbDateStruct = changes.toDate.currentValue;
+
+      if(fDate) {
+        parsed += this._parserFormatter.format(fDate);
+      }
+        
+      if(tDate) {
+        parsed += ' - ' + this._parserFormatter.format(tDate);
+      }
+
+      this.renderer.setProperty(this.myRangeInput.nativeElement, 'value', parsed);
+    }
+
+    public reset() {
+      this.renderer.setProperty(this.myRangeInput.nativeElement, 'value', '');
+    }
+
+    protected datePopinOpened: boolean;
+    public closeDatePopinIfOpened(): void {
+      if (this.datePopinOpened) {
+        this.input.toggle();
+        this.datePopinOpened = ! this.datePopinOpened;
+      }
+    }
+
+    
+    public onClickCalButton(): void {
+      this.datePopinOpened = ! this.datePopinOpened;
+      this.input.toggle();
     }
 }
