@@ -1,3 +1,4 @@
+<div clickOutside (clickOutside)="closeDatePopinIfOpened()">
 <form class="form-inline">
     <div class="form-group">
       <div class="input-group">
@@ -16,9 +17,8 @@
           [startDate]="startDate"
           [maxDate]="maxDate"
           [minDate]="minDate"
-          #d="ngbDatepicker"
-          (click)="d.toggle()">
-  
+          #d="ngbDatepicker">
+          <input type="button" value="Cal" (click)="onClickCalButton()">
           <ng-template #t let-date="date" let-focused="focused">
               <span class="custom-day"
                   [class.range]="isFrom(date) || isTo(date) || isInside(date) || isHovered(date)"
@@ -33,3 +33,4 @@
       </div>
     </div>
   </form>
+</div> 

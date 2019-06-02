@@ -14,9 +14,10 @@ import {
 } from "@ng-bootstrap/ng-bootstrap";
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ClickOutSideDirective } from './directives/click-outside.directive';
 
 @NgModule({
-  declarations: [JliDatepickerComponent],
+  declarations: [JliDatepickerComponent, ClickOutSideDirective],
   imports: [
     BrowserModule, FormsModule, ReactiveFormsModule,
     NgbModule.forRoot()

@@ -5,18 +5,20 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { NgbDatepickerModule, NgbDateParserFormatter, NgbDateAdapter, NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
-import { JliDatepickerComponent } from 'jli-datepicker';
+import { JliDatepickerComponent } from 'projects/jli-datepicker/src/public_api';
 import { FormsModule } from '@angular/forms';
-import { NgbDateFRParserFormatter } from 'jli-datepicker';
-import { NgbUTCStringAdapter } from 'jli-datepicker';
+import { NgbDateFRParserFormatter } from 'projects/jli-datepicker/src/public_api';
+import { NgbUTCStringAdapter } from 'projects/jli-datepicker/src/public_api';
 
 import { LOCALE_ID } from '@angular/core';
 import { i18nDatepicker } from './i18n/i18n-datepicker';
+import { ClickOutSideDirective } from './click-outside.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
-    JliDatepickerComponent
+    JliDatepickerComponent,
+    ClickOutSideDirective
   ],
   imports: [
     BrowserModule,

@@ -21,8 +21,10 @@
 <router-outlet></router-outlet>
 
 
-<lib-jli-datepicker (change)="OnDateChange($event)"></lib-jli-datepicker>
+<lib-jli-datepicker #date [fromDate]="fromDate" [toDate]="toDate" (change)="OnDateChange($event)"></lib-jli-datepicker>
 
+<input type="button" value="SetCal" (click)="toto()">
+<input type="button" value="Reset" (click)="reset()">
 
 <hr/>
 <pre>From: {{ fromDate | json }}</pre>
