@@ -15,12 +15,14 @@ import {
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClickOutSideDirective } from './directives/click-outside.directive';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [JliDatepickerComponent, ClickOutSideDirective],
   imports: [
     BrowserModule, FormsModule, ReactiveFormsModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    FontAwesomeModule
   ],
   exports: [JliDatepickerComponent],
   providers: []

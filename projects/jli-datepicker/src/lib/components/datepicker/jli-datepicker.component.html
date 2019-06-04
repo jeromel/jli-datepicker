@@ -1,4 +1,4 @@
-<div clickOutside (clickOutside)="closeDatePopinIfOpened()">
+<div clickOutside (clickOutside)="closeDatePopin()">
 <form class="form-inline">
     <div class="form-group">
       <div class="input-group">
@@ -18,7 +18,7 @@
           [maxDate]="maxDate"
           [minDate]="minDate"
           #d="ngbDatepicker">
-          <input type="button" value="Cal" (click)="onClickCalButton()">
+          <button class="ui-jlidatepicker-button" (click)="onClickCalButton()"><fa-icon class="far" [icon]="faCalendarAlt" title="Choisir une plage de date."></fa-icon></button>
           <ng-template #t let-date="date" let-focused="focused">
               <span class="custom-day"
                   [class.range]="isFrom(date) || isTo(date) || isInside(date) || isHovered(date)"
