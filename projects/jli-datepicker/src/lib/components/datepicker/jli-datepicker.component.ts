@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewChild, ElementRef, Renderer2, Output, EventEmitter, Input, OnChanges} from '@angular/core';
 import { NgbDateStruct, NgbInputDatepicker, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { NgModel } from '@angular/forms';
+import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 
 const now = new Date();
 const equals = (one: NgbDateStruct, two: NgbDateStruct) =>
@@ -20,7 +21,7 @@ const after = (one: NgbDateStruct, two: NgbDateStruct) =>
   styleUrls: [ './jli-datepicker.component.scss']
 })
 export class JliDatepickerComponent implements OnInit, OnChanges {
-  startDate: NgbDateStruct;
+    startDate: NgbDateStruct;
     maxDate: NgbDateStruct;
     minDate: NgbDateStruct;
     hoveredDate: NgbDateStruct;
@@ -34,8 +35,11 @@ export class JliDatepickerComponent implements OnInit, OnChanges {
     @ViewChild(NgModel) datePick: NgModel;
     @ViewChild('myRangeInput') myRangeInput: ElementRef;
 
-    isHovered = date => 
-    this.fromDate && !this.toDate && this.hoveredDate && after(date, this.fromDate) && before(date, this.hoveredDate)
+    faCalendarAlt = faCalendarAlt;
+
+    isHovered = date => {
+      return this.fromDate && !this.toDate && this.hoveredDate && after(date, this.fromDate) && before(date, this.hoveredDate)
+    };
     isInside = date => after(date, this.fromDate) && before(date, this.toDate);
     isFrom = date => equals(date, this.fromDate);
     isTo = date => equals(date, this.toDate);
@@ -44,7 +48,6 @@ export class JliDatepickerComponent implements OnInit, OnChanges {
     }
 
     ngOnInit() {
-        this.datePopinOpened = false;
         let startYear: number = now.getFullYear();
         let startMonth: number = now.getMonth();
 
@@ -107,17 +110,23 @@ export class JliDatepickerComponent implements OnInit, OnChanges {
       this.renderer.setProperty(this.myRangeInput.nativeElement, 'value', '');
     }
 
-    protected datePopinOpened: boolean;
-    public closeDatePopinIfOpened(): void {
-      if (this.datePopinOpened) {
-        this.input.toggle();
-        this.datePopinOpened = ! this.datePopinOpened;
-      }
+    public get isDatePopinOpen(): boolean {
+      return this.input.isOpen();
     }
 
-    
-    public onClickCalButton(): void {
-      this.datePopinOpened = ! this.datePopinOpened;
+    public closeDatePopin(): void {
+      this.input.close();
+    }
+
+    public openDatePopin(): void {
+      this.input.open();
+    }
+
+    public toggleDatePopin(): void {
       this.input.toggle();
+    }
+
+    public onClickCalButton(): void {
+      this.toggleDatePopin();
     }
 }

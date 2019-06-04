@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { NgbDatepickerModule, NgbDateParserFormatter, NgbDateAdapter, NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { JliDatepickerComponent } from 'projects/jli-datepicker/src/public_api';
 import { FormsModule } from '@angular/forms';
 import { NgbDateFRParserFormatter } from 'projects/jli-datepicker/src/public_api';
@@ -24,7 +25,8 @@ import { ClickOutSideDirective } from './click-outside.directive';
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    NgbDatepickerModule
+    NgbDatepickerModule,
+    FontAwesomeModule,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr' },
