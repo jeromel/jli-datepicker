@@ -103,11 +103,15 @@ export class JliDatepickerComponent implements OnInit, OnChanges {
         parsed += ' - ' + this._parserFormatter.format(tDate);
       }
 
-      this.renderer.setProperty(this.myRangeInput.nativeElement, 'value', parsed);
+      if (this.myRangeInput) {
+        this.renderer.setProperty(this.myRangeInput.nativeElement, 'value', parsed);
+      }
     }
 
     public reset() {
-      this.renderer.setProperty(this.myRangeInput.nativeElement, 'value', '');
+      if (this.myRangeInput) {
+        this.renderer.setProperty(this.myRangeInput.nativeElement, 'value', '');
+      }
     }
 
     public get isDatePopinOpen(): boolean {
