@@ -1,36 +1,21 @@
 <div class="ui-jlidatepicker-wrapper" clickOutside (clickOutside)="closeDatePopin()">
-<form class="ui-jlidatepicker-form form-inline">
+  <form class="ui-jlidatepicker-form form-inline">
     <div class="ui-jlidatepicker-form-group form-group">
       <div class="ui-jlidatepicker-input-group  input-group">
-        <input
-           #myRangeInput
-          class="form-control" 
-          placeholder="dd/mm/yyyy - dd/mm/yyyy"
-          name="dp" 
-          
-          ngbDatepicker 
-          [dayTemplate]="t"
-          [autoClose]="false"
-          [displayMonths]="3"
-          [showWeekNumbers]="true"
-          [outsideDays]="'hidden'"
-          [startDate]="startDate"
-          [maxDate]="maxDate"
-          [minDate]="minDate"
-          #d="ngbDatepicker">
-          <button class="ui-jlidatepicker-button" (click)="onClickCalButton()"><fa-icon class="far" [icon]="faCalendarAlt" title="Choisir une plage de date."></fa-icon></button>
-          <ng-template #t let-date="date" let-focused="focused">
-              <span class="custom-day"
-                  [class.range]="isFrom(date) || isTo(date) || isInside(date) || isHovered(date)"
-                  [class.faded]="isHovered(date) || isInside(date)"
-                  (click)="onDateSelection(date)"
-                  (mouseenter)="hoveredDate = date"
-                  (mouseleave)="hoveredDate = null"
-                  >
-              {{ date.day }}
-              </span>
-          </ng-template>
+        <input #myRangeInput class="form-control" placeholder="dd/mm/yyyy - dd/mm/yyyy" name="dp" ngbDatepicker [dayTemplate]="t" [autoClose]="false"
+          [displayMonths]="3" [showWeekNumbers]="true" [outsideDays]="'hidden'" [startDate]="startDate" [maxDate]="maxDate" [minDate]="minDate"
+          autocomplete="off" #d="ngbDatepicker">
+        <button class="ui-jlidatepicker-button" (click)="onClickCalButton()">
+          <fa-icon class="far" [icon]="faCalendarAlt" title="Choisir une plage de date."></fa-icon>
+        </button>
+        <ng-template #t let-date="date" let-focused="focused">
+          <span class="custom-day" [class.range]="isFrom(date) || isTo(date) || isInside(date) || isHovered(date)"
+            [class.faded]="isHovered(date) || isInside(date)" (click)="onDateSelection(date)" (mouseenter)="hoveredDate = date"
+            (mouseleave)="hoveredDate = null">
+            {{ date.day }}
+          </span>
+        </ng-template>
       </div>
     </div>
   </form>
-</div> 
+</div>
